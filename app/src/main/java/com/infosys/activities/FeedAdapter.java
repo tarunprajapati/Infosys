@@ -35,8 +35,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         return list;
     }
 
-    public void clearList(){
-        list.clear();
+    public void clearList() {
+        if (list != null)
+            list.clear();
         notifyDataSetChanged();
     }
 
