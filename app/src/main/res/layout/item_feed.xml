@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+
+
+        <variable
+            name="frag"
+            type="com.infosys.activities.FeedFragment" />
+
+        <variable
+            name="adapter"
+            type="com.infosys.activities.FeedAdapter" />
+
+        <variable
+            name="feed"
+            type="com.infosys.activities.Feed" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+
+            <com.infosys.views.CircleImageView
+                android:id="@+id/img"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                app:image="@{feed.imageHref}"
+                android:layout_marginRight="7dp"
+                android:layout_centerVertical="true"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:id="@+id/txtTitle"
+                style="@style/outer_title_blue_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/img"
+                android:visibility="@{feed.title == null || feed.title.isEmpty() ? View.GONE : View.VISIBLE}"
+                android:text="@{feed.title == null || feed.title.isEmpty() ? `` : feed.title.trim()}" />
+
+            <TextView
+                android:id="@+id/txtDes"
+                style="@style/sub_title_tv"
+                android:layout_below="@+id/txtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/img"
+                android:visibility="@{feed.description == null || feed.description.isEmpty() ? View.GONE : View.VISIBLE}"
+                android:text="@{feed.description == null || feed.description.isEmpty() ? `` : feed.description.trim()}" />
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</layout>
