@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">InfosysTest</string>
+
+            <string name="action_settings">Settings</string>
+    <string name="didntWrk">Something Wrong</string>
+    <string name="tryAgain">Try Again</string>
+    <string name="feeds">Feeds</string>
+    <string name="no_feeds">No Feeds Found</string>
+    <string name="cancel">Cancel</string>
+    <string name="retry">Retry</string>
+    <string name="action_refresh">Refresh</string>
+</resources>

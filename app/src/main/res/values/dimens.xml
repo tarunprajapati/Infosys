@@ -1,0 +1,15 @@
+<resources>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+    <dimen name="header_tv">18sp</dimen>
+    <dimen name="action_bar_tv">20sp</dimen>
+    <dimen name="outer_title_tv">16sp</dimen>
+    <dimen name="inner_title_tv">14sp</dimen>
+    <dimen name="sub_title_tv">12sp</dimen>
+    <dimen name="sub_sub_tv">10sp</dimen>
+    <dimen name="war_suc_tv">14sp</dimen>
+    <dimen name="big_button_tv">18sp</dimen>
+    <dimen name="item_button_tv">14sp</dimen>
+</resources>

@@ -1,0 +1,76 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ActionBar" parent="Theme.AppCompat">
+        <item name="android:titleTextStyle">@style/ActionBar.TitleTextStyle</item>
+    </style>
+
+    <style name="ActionBar.TitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="MyToolbar">
+        <item name="android:titleTextStyle">@style/MyTitleTextStyle</item>
+        <item name="android:subtitleTextStyle">@style/SubTitleTextStyle</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/action_bar_tv</item>
+        <item name="android:gravity">center</item>
+
+        <!-- Support library compatibility -->
+        <item name="background">@color/colorPrimary</item>
+        <item name="titleTextStyle">@style/MyTitleTextStyle</item>
+        <item name="subtitleTextStyle">@style/SubTitleTextStyle</item>
+    </style>
+
+    <style name="MyTitleTextStyle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/action_bar_tv</item>
+        <!--<item name="android:background">@drawable/action_bar</item>-->
+    </style>
+
+    <style name="SubTitleTextStyle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textSize">@dimen/outer_title_tv</item>
+        <!--<item name="android:background">@drawable/action_bar</item>-->
+    </style>
+
+    <style name="outer_title_blue_tv" parent="@android:style/Widget.Holo.TextView">
+        <item name="android:textSize">@dimen/outer_title_tv</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="sub_title_tv" parent="@android:style/Widget.Holo.TextView">
+        <item name="android:textSize">@dimen/sub_title_tv</item>
+        <item name="android:textColor">@color/sub_title_tv</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="empty_note" parent="@android:style/Widget.Holo.TextView">
+        <item name="android:textSize">@dimen/war_suc_tv</item>
+        <item name="android:textColor">@color/empty_note</item>
+    </style>
+
+    <style name="screen_bg">
+        <item name="android:background">@color/screen_bg</item>
+        <item name="android:clickable">true</item>
+        <item name="android:animateLayoutChanges">true</item>
+    </style>
+
+</resources>

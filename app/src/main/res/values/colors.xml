@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="outer_title_blue_tv">#0B6B9D</color>
+    <color name="sub_title_tv">#787878</color>
+    <color name="empty_note">#47495E</color>
+    <color name="screen_bg">#CBD4D9</color>
+</resources>
