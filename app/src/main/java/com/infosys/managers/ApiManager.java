@@ -24,7 +24,9 @@ public class ApiManager {
     }
 
     public void getFeeds(BaseFragment fragment) {
-        Call<ResponseBody> responseBodyCall = ApiClient.newApiClient().getInterfaceSToken(fragment.getActivity()).getFeeds();
-        fragment.serviceCaller(fragment, responseBodyCall, Constants.FEEDS, true, RETROFIT);
+        if(CheckInternet.newInstance().internetIsAvailable(fragment.getContext())) {
+            Call<ResponseBody> responseBodyCall = ApiClient.newApiClient().getInterfaceSToken(fragment.getActivity()).getFeeds();
+            fragment.serviceCaller(fragment, responseBodyCall, Constants.FEEDS, true, RETROFIT);
+        }
     }
 }
