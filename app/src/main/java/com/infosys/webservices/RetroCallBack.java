@@ -29,7 +29,7 @@ import retrofit2.Response;
 /**
  * Custom call back for retrofit
  * <p/>
- * Created by ayush on 1/9/16.
+ * Created by Tarun on 1/9/16.
  */
 public abstract class RetroCallBack<T> implements Callback<T> {
     LoadType loadType;
@@ -90,10 +90,8 @@ public abstract class RetroCallBack<T> implements Callback<T> {
 
         if (message == null) {
             setMessage(null);
-//            ((BaseFragmentActivity)context).onShowLoadingView(new ShowLoadingView(getLoadType(), true));
         } else {
             setMessage(message);
-            //          ((BaseFragmentActivity)context).onShowLoadingView(new ShowLoadingView(getLoadType(), true, getMessage()));
         }
     }
 
@@ -114,10 +112,8 @@ public abstract class RetroCallBack<T> implements Callback<T> {
 
         if (message == null) {
             setMessage(null);
-            // ((BaseFragmentActivity)context).onShowLoadingView(new ShowLoadingView(getLoadType(), true));
         } else {
             setMessage(message);
-            // ((BaseFragmentActivity)context).onShowLoadingView(new ShowLoadingView(getLoadType(), true, getMessage()));
         }
     }
 
@@ -152,13 +148,8 @@ public abstract class RetroCallBack<T> implements Callback<T> {
         this.loadType = loadType;
     }
 
-    //    public void onSuccess(Response<T> response) {
-//        LogWrapper.v("onResponse called");
-//        EventBus.getDefault().post(new ShowLoadingView(getLoadType(), false));
-//    }
     public void onSuccess(ResponseModel responseModel, JSONObject jsonObject) {
         LogWrapper.v("onResponse called");
-        //  ((BaseFragmentActivity)context).onShowLoadingView(new ShowLoadingView(getLoadType(), false));
     }
 
     /**
@@ -197,13 +188,9 @@ public abstract class RetroCallBack<T> implements Callback<T> {
         if (jsonObject != null) {
             ResponseModel responseModel = null;
             try {
-                //responseModel = gson.fromJson(String.valueOf(jsonObject), ResponseModel.class);
-                //ChannelSearchEnum[] enums = gson.fromJson(String.valueOf(jsonObject), ChannelSearchEnum[].class);
                 responseModel = new ResponseModel();
                 responseModel.setRows(jsonObject.getJSONArray("rows"));
                 responseModel.setTitle(jsonObject.getString("title"));
-                //Collection<Feed> ints2 = gson.fromJson(String.valueOf(jsonObject.getJSONArray("rows")), collectionType);
-                //Log.i("REs", ints2.toString());
             } catch (NumberFormatException e) {
                 onJsonReceived(jsonObject);
                 return;
@@ -259,7 +246,6 @@ public abstract class RetroCallBack<T> implements Callback<T> {
         Call<ResponseBody> bodyCall = (Call<ResponseBody>) call;
         try {
             if (t.getMessage().contains("Unable to resolve host")) {
-                //  ((BaseFragmentActivity)context).onShowLoadingView(new ShowLoadingView(getLoadType(), false));
                 ((BaseFragmentActivity) context).onShowNoInternetSnackBar(call, retroCallBack);
             } else {
                 onApiFailed();
@@ -269,47 +255,13 @@ public abstract class RetroCallBack<T> implements Callback<T> {
             onApiFailed();
             e.printStackTrace();
         }
-
-//        LogWrapper.v("Reason of api failure: " + t.getMessage());
     }
 
     /**
      * Called when API call failed due to any reason, will display a snackbar notification
      */
     public void onApiFailed() {
-        //   ((BaseFragmentActivity)context).onShowLoadingView(new ShowLoadingView(getLoadType(), false));
-
         onFailed(new ResponseModel());
-    }
-
-    public void cacheResponse(Context context, Call<T> call) {
-        this.context = context;
-        setCall(call);
-
-        String url = call.request().url().toString();
-        String params = bodyToString(call.request().body());
-        String key = url + "#" + params;
-
-//        ShpUtil.saveToPrefs(getContext(), key, );
-
-        String response = MySharedPreferences.newInstance().getString(context, key, "");
-
-        if (!TextUtils.isEmpty(response)) {
-            ResponseModel responseModel = gson.fromJson(response, ResponseModel.class);
-
-            if (responseModel.getStatus() == 1) {
-                try {
-                    onCachedResponseReceived(new JSONObject(response));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-    }
-
-    public void onCachedResponseReceived(JSONObject response) {
-        //((BaseFragmentActivity)context).onShowLoadingView(new ShowLoadingView(getLoadType(), false));
     }
 }
 

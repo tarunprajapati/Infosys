@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by ayush on 22/7/16.
+ * Created by Tarun on 8/9/18.
  */
 public class FeedFragment extends BaseFragment {
     public static final String TAG = "Order List";

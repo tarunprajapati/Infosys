@@ -44,27 +44,6 @@ public class CommonServiceCaller {
         asy.execute();
     }
 
-    public void serviceCaller(final BaseFragmentActivity act, Call<ResponseBody> resCall, final int requstCode, boolean isShowProgress, int requestType) {
-        //context = act;
-        AsyncTaskManager.CallBackListener callBackListener = getCallBackListener(act, requstCode);
-
-        asy = new AsyncTaskManager(act, resCall, requstCode, requestType);
-        asy.setCallBackListener(callBackListener);
-        asy.isProgressBarShow = isShowProgress;
-        asy.execute();
-    }
-
-    public void serviceCaller(final BaseFragmentActivity act, String urlsArr[], HashMap<String, String> params, boolean isPost, boolean isFileUploading, final int requstCode, boolean isShowProgress, int requestType) {
-        //context = act;
-        final String urls[] = urlsArr;
-        AsyncTaskManager.CallBackListener callBackListener = getCallBackListener(act, requstCode);
-
-        asy = new AsyncTaskManager(act, urls, params, requstCode, isPost, requestType);
-        asy.setCallBackListener(callBackListener);
-        asy.isProgressBarShow = isShowProgress;
-        asy.execute();
-    }
-
     public void serviceCaller(final BaseFragment act, String urlsArr[], HashMap<String, String> params, boolean isPost, boolean isFileUploading, final int requstCode, boolean isShowProgress, int requestType) {
         //context = act.getActivity();
         final String urls[] = urlsArr;

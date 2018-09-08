@@ -45,12 +45,7 @@ import retrofit2.Call;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public abstract class BaseFragmentActivity extends AppCompatActivity implements ServiceCallerInterface {
-    protected static String TAG = "Box";
-    public CharSequence mTitle;
-    protected Bundle myBundle = null;
-    private String bundleArg = "argBundle";
     protected boolean isGranted = true;
-    private AlertDialog alertLang;
     private Snackbar snack;
 
     @Override
@@ -71,38 +66,6 @@ public abstract class BaseFragmentActivity extends AppCompatActivity implements 
     @Override
     protected void onStart() {
         super.onStart();
-    }
-
-    public void enableBackButton() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-    }
-
-    protected Bundle getBundle() {
-        return getIntent().getBundleExtra(bundleArg);
-    }
-
-    public void startMyActivity(Class targetActivity, Bundle myBundle) {
-        Intent intent = new Intent(this, targetActivity);
-        if (myBundle != null)
-            intent.putExtra(bundleArg, myBundle);
-        startActivity(intent);
-    }
-
-    public void startMyActivityForResult(Class targetActivity, Bundle myBundle, int requestCode) {
-        Intent intent = new Intent(this, targetActivity);
-        if (myBundle != null)
-            intent.putExtra(bundleArg, myBundle);
-        startActivityForResult(intent, requestCode);
-    }
-
-    public void addFragment(Fragment fragment, String tagValue, boolean addToBackStack) {
-        //MyApplication.getApplication().addFragment(fragment);
-        FragmentTransaction ft = getFragmentTransaction();
-        ft.add(R.id.content, fragment, tagValue);
-        if (addToBackStack)
-            ft.addToBackStack(tagValue);
-        ft.commit();
     }
 
 
@@ -126,22 +89,8 @@ public abstract class BaseFragmentActivity extends AppCompatActivity implements 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //actionBar.setIcon(R.side_menu.ic_launcher);
-        //actionBar.setIcon(null);
     }
 
-    @SuppressLint("NewApi")
-    public void setTitleOnAction(String title, String subT, int drawableBackIcon) {
-        ActionBar actionBar = getSupportActionBar();
-        try {
-            if (actionBar != null) {
-                actionBar.setHomeAsUpIndicator(drawableBackIcon);
-                setTitleOnAction(title, subT, true);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public FragmentTransaction getFragmentTransaction() {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -151,45 +100,6 @@ public abstract class BaseFragmentActivity extends AppCompatActivity implements 
         return transaction;
     }
 
-    public android.app.FragmentTransaction getFragmentTransactionNormal() {
-        android.app.FragmentManager fragmentManager = getFragmentManager();
-        android.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-        return transaction;
-    }
-
-    public void addFragment(Fragment fragment, String tag) {
-        FragmentTransaction transaction = getFragmentTransaction();
-        transaction.add(R.id.content, fragment, tag);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
-    public void addWithoutAnimationFragment(Fragment fragment, String tag, String tagValue, boolean addToBackStack) {
-        //MyApplication.getApplication().addFragment(fragment);
-        FragmentTransaction ft = getFragmentNormalTransaction();
-        ft.add(R.id.content, fragment, tag);
-        if (addToBackStack)
-            ft.addToBackStack(tag);
-        ft.commit();
-    }
-
-    public FragmentTransaction getFragmentNormalTransaction() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        //transaction.setCustomAnimations(R.anim.slide_in_down, R.anim.slide_out_up);
-        //transaction.setCustomAnimations(R.anim.slide_in_down, R.anim.slide_out_up, R.anim.slide_out_down, R.anim.slide_in_up);
-        return transaction;
-    }
-
-
-    public void replaceFragment(Fragment fragment, String tagValue) {
-        FragmentTransaction transaction = getFragmentTransaction();
-        try {
-            transaction.replace(R.id.content, fragment, tagValue).commit();
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-    }
 
     public void replaceFragment(Fragment fragment, String tagValue, boolean addToBackStack) {
         FragmentTransaction transaction = getFragmentTransaction();
@@ -202,95 +112,6 @@ public abstract class BaseFragmentActivity extends AppCompatActivity implements 
         }
     }
 
-    public void replaceFragment(Fragment fragment) {
-        FragmentTransaction transaction = getFragmentTransaction();
-        try {
-            transaction.replace(R.id.content, fragment).commit();
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void replaceFragment(android.app.Fragment fragment) {
-        android.app.FragmentTransaction transaction = getFragmentTransactionNormal();
-        try {
-            transaction.replace(R.id.content, fragment).commit();
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public void removeFragment(Fragment fragment) {
-        FragmentTransaction transaction = getFragmentTransaction();
-        //transaction.setCustomAnimations(R.anim.slide_out_up, R.anim.slide_in_down);
-        transaction.remove(fragment).commit();
-        //getSupportFragmentManager().popBackStack();
-        boolean isAddBackStatckAllowed = transaction.isAddToBackStackAllowed();
-    }
-
-    public void removeTopFragement() {
-        getSupportFragmentManager().popBackStack();
-        // BaseFragment fragment = getTopFragment(true);
-        // setTitle("");
-    }
-
-    public Fragment getTopFragment(boolean isRefreshTitle) {
-        Fragment fr = null;
-        try {
-            FragmentManager fm = getSupportFragmentManager();
-            int count = fm.getBackStackEntryCount();
-
-            if (count > 0) {
-                BackStackEntry en = fm.getBackStackEntryAt(count - 1);
-                String name = en.getName();
-                fr = fm.findFragmentByTag(name);
-                /*if (isRefreshTitle)
-                    setTitleOnAction(name, "", false);*/
-            }
-            return fr;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public int getBackStackCount() {
-        try {
-            FragmentManager fm = getSupportFragmentManager();
-            int count = fm.getBackStackEntryCount();
-            return count;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
-    public Fragment getFragmentByTag(String tAG) {
-        return getSupportFragmentManager().findFragmentByTag(tAG);
-    }
-
-   /* protected boolean disableBackButton() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(false);
-            actionBar.setHomeButtonEnabled(false);
-        }
-        return true;
-    }*/
-
-    protected boolean removeBackButton() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(false);
-            actionBar.setHomeButtonEnabled(false);
-        }
-        return true;
-    }
-
-    protected void clearBackStackAllFragments() {
-        getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-    }
 
     @Override
     protected void onResume() {
@@ -304,33 +125,10 @@ public abstract class BaseFragmentActivity extends AppCompatActivity implements 
     }
 
 
-    protected void setStatusBarTranslucent(boolean makeTranslucent) {
-        if (makeTranslucent) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        } else {
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
-    }
-
-    @TargetApi(21)
-    protected void setStatusBarAsTheme() {
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-    }
-
-    public void serviceCaller(BaseFragmentActivity act, String urlsArr[], HashMap<String, String> params, Boolean isPost, Boolean isFileUploading, int requestCode, boolean isShowProgress, int requestType) {
-        CommonServiceCaller.newInstance(act).serviceCaller(act, urlsArr, params, isPost, isFileUploading, requestCode, isShowProgress, requestType);
-    }
-
     public void serviceCaller(BaseFragment fragment, String urlsArr[], HashMap<String, String> params, Boolean isPost, Boolean isFileUploading, int requestCode, boolean isShowProgress, int requestType) {
         CommonServiceCaller.newInstance(fragment.getActivity()).serviceCaller(fragment, urlsArr, params, isPost, isFileUploading, requestCode, isShowProgress, requestType);
     }
 
-    public void serviceCaller(BaseFragmentActivity act, Call<ResponseBody> resBody, int requestCode, boolean progress, int requestType) {
-        CommonServiceCaller.newInstance(act).serviceCaller(act, resBody, requestCode, progress, requestType);
-    }
 
     public void serviceCaller(BaseFragment fragment, Call<ResponseBody> resBody, int requestCode, boolean progress, int requestType) {
         CommonServiceCaller.newInstance(fragment.getActivity()).serviceCaller(fragment, resBody, requestCode, progress, requestType);
@@ -369,12 +167,6 @@ public abstract class BaseFragmentActivity extends AppCompatActivity implements 
 
     public Snackbar getSnackBar(String msg, int length) {
         Snackbar snack = Snackbar.make(findViewById(android.R.id.content), msg, length);
-        /*snack.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.mahroon_light));
-        TextView tv = (TextView) snack.getView().findViewById(android.support.design.R.id.snackbar_text);
-        tv.setTextColor(ContextCompat.getColor(this, R.color.white));
-        TextView action = (TextView) snack.getView().findViewById(android.support.design.R.id.snackbar_action);
-        action.setTextColor(ContextCompat.getColor(this, R.color.black));*/
-        //snack.getView().setText(ContextCompat.getColor(this, R.color.white));
         return snack;
     }
 
@@ -391,7 +183,6 @@ public abstract class BaseFragmentActivity extends AppCompatActivity implements 
         i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         context.startActivity(i);
     }
-
 
 
     public void onShowNoInternetSnackBar(Call apiCall, RetroCallBack<ResponseBody> retroCallBack) {
@@ -451,18 +242,6 @@ public abstract class BaseFragmentActivity extends AppCompatActivity implements 
         snack = null;
     }
 
-
-
-    public void setActionBarWithBack(String title, String subtitle) {
-        ActionBar actionBar = getSupportActionBar();
-//        actionBar.
-        actionBar.setTitle(title);
-        actionBar.setSubtitle(subtitle);
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setDisplayShowCustomEnabled(false);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

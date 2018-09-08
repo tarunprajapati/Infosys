@@ -28,9 +28,6 @@ public class CheckInternet {
             if (info != null) {
                 for (int i = 0; i < info.length; i++) {
                     if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-                        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            connectivity.unregisterNetworkCallback(new ConnectivityManager.NetworkCallback());
-                        }*/
                         connectivity = null;
                         context = null;
                         info[i] = null;
@@ -55,9 +52,6 @@ public class CheckInternet {
 
                 return true;
             } else {
-                /*Toast toast = ToastCustomClass.showToast(context, context.getString(R.string.internet_not_available), 2000);
-            toast.setGravity(Gravity.CENTER,  0 , 0);
-			toast.show();*/
                 alertWarningMsg(context);
                 return false;
             }
@@ -77,77 +71,15 @@ public class CheckInternet {
                     alert.setButton(AlertDialog.BUTTON_NEGATIVE, "OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-							/*
-							 * Kill application when the root activity is killed.
-							 */							
-
-							/*Intent startMain = new Intent(Intent.ACTION_MAIN);
-							startMain.addCategory(Intent.CATEGORY_HOME);
-							startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-							context.startActivity(startMain);
-							
-							((Activity)context).finish();*/
                         }
                     });
 
                     alert.setButton(AlertDialog.BUTTON_POSITIVE, "Settings", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //UIHelper.killApp(true);
+
 
                             context.startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
-//							Intent startMain = new Intent(Intent.ACTION_MAIN);
-//							startMain.addCategory(Intent.CATEGORY_HOME);
-//							startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//							context.startActivity(startMain);			    
-							/*
-							 * Kill application when the root activity is killed.
-							 */
-
-                            //((Activity)context).finish();
-                        }
-                    });
-                    // Showing Alert Message
-                    alert.show();
-                }
-            });
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void alertWarningMsgForMockLocation(final Context context) {
-        try {
-            ((Activity) context).runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    AlertDialog alert = new AlertDialog.Builder(context).create();
-                    alert.setTitle("Warning!");
-                    alert.setMessage("Please disable mock location.!");
-                    alert.setIcon(android.R.drawable.ic_dialog_alert);
-                    // Setting OK Button
-                    alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //((Activity) context).finish();
-
-							/*
-							 * Kill application when the root activity is killed.
-							 */
-
-
-							/*Intent startMain = new Intent(Intent.ACTION_MAIN);
-							startMain.addCategory(Intent.CATEGORY_HOME);
-							startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-							context.startActivity(startMain);*/
-                        }
-                    });
-
-                    alert.setButton(AlertDialog.BUTTON_POSITIVE, "Settings", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            context.startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
-
                         }
                     });
                     // Showing Alert Message

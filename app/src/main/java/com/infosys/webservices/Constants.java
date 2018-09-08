@@ -5,11 +5,8 @@ package com.infosys.webservices;
  */
 public interface Constants {
     String data = "data";
-    String object = "holidayObj";
     String status = "status";
 
-    int VOLLEY = 1;
-    int VOLLEY_JSON = 2;
     int RETROFIT = 3;
 
     //REQUEST CODES

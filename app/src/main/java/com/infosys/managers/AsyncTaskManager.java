@@ -7,12 +7,12 @@ import android.support.annotation.NonNull;
 import android.view.Window;
 
 import java.util.HashMap;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import static com.infosys.webservices.Constants.RETROFIT;
-import static com.infosys.webservices.Constants.VOLLEY_JSON;
 
-//import com.wang.avi.AVLoadingIndicatorView;
+import static com.infosys.webservices.Constants.RETROFIT;
+
 
 public class AsyncTaskManager {
     private Call<ResponseBody> reqCall = null;
@@ -55,17 +55,6 @@ public class AsyncTaskManager {
         this.requestType = requestType;
     }
 
-    /*public AsyncTaskManager(@NonNull Context context, @NonNull String[] urls, HashMap<String, String> params, String progressMsg, boolean isPost, int requestType) {
-        this.context = context;
-        this.urls = urls;
-        this.params = params;
-        this.progressMsg = progressMsg;
-        this.isPost = isPost;
-
-        parsingClass = ParsingManager.newInstance(context);
-        this.requestType = requestType;
-    }*/
-
     public void execute() {
         Dialog progressDialog = null;
         try {
@@ -91,11 +80,6 @@ public class AsyncTaskManager {
             case RETROFIT:
                 parsingClass.callRetrofit(context, reqCall, apiResponse, callBackListener, progressDialog, requestCode);
                 break;
-            case VOLLEY_JSON:
-                for (String url : urls)
-                    if (params != null)
-                        parsingClass.doJsonObjectRequest(context, url, params, apiResponse, isPost, callBackListener, progressDialog, requestCode);
-                break;
         }
     }
 
@@ -111,11 +95,6 @@ public class AsyncTaskManager {
                 if (parsingClass != null && parsingClass.retroCallBack != null)
                     parsingClass.retroCallBack.cancelCall();
                 break;
-            case VOLLEY_JSON:
-                for (String url : urls)
-                   /* if (params != null)
-                        parsingClass.doJsonObjectRequest(context, url, params, apiResponse, isPost, callBackListener, progressDialog, requestCode);*/
-                    break;
         }
 
     }
